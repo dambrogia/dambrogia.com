@@ -109,3 +109,15 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.u-container {
+  @apply container px-4 mx-auto;
+}
+
+.u-row {
+  @apply -mx-4;
+}
+
+.u-col {
+  @apply px-4;
+}
