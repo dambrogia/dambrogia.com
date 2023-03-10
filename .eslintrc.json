@@ -1,3 +1,11 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": ["error", "never"],
+    "object-curly-spacing": ["error", "never"],
+    "array-bracket-spacing": ["error", "never"],
+    "@next/next/no-img-element": "off",
+    "quotes": ["error", "single"]
+  }
 }
