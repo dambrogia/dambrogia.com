@@ -1,0 +1,9 @@
+export const socialLinks = [
+  {label: 'Stack Overflow', icon: <i className="uil uil-arrow"></i>, link: 'https://stackoverflow.com/users/3404054/domdambrogia'},
+  {label: 'Github', icon: <i className="uil uil-github"></i>, link: 'https://github.com/dambrogia'},
+  {label: 'LinkedIn', icon: <i className="uil uil-linkedin"></i>, link: 'https://www.linkedin.com/in/dominic-dambrogia-262016b8/'},
+  {label: 'Instagram', icon: <i className="uil uil-instagram"></i>, link: 'https://www.instagram.com/dombrogia/'},
+  {label: 'Facebook', icon: <i className="uil uil-facebook"></i>, link: 'https://www.facebook.com/domdambrogia'},
+  {label: 'Twitter', icon: <i className="uil uil-twitter"></i>, link: 'https://twitter.com/domdambrogia'},
+  {label: 'Email', icon: <i className="uil uil-envelope"></i>, link: '/#contact'},
+].sort((a, b) => a.label < b.label ? -1 : 1)
