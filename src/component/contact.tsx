@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {PropsWithChildren} from 'react'
+import {MouseEventHandler, PropsWithChildren} from 'react'
 
 function ContactIconText({icon, children}: PropsWithChildren<{ icon: string }>) {
   return <div className="flex items-center justify-start pb-4">
@@ -8,8 +8,25 @@ function ContactIconText({icon, children}: PropsWithChildren<{ icon: string }>) 
   </div>
 }
 
+async function submit (e: MouseEventHandler<HTMLButtonElement>) {
+  const inputs = ['name', 'email', 'phone', 'message']
+
+  const values = inputs.map(i => {
+      return {[i]: (document.querySelector(`[name="${i}"]`) as HTMLInputElement)?.value}
+  })
+
+  const response = await fetch('/api/email', {
+    headers: {'Content-Type': 'application/json'},
+    method: 'POST',
+    body: JSON.stringify(values),
+  })
+
+  const data = await response.json()
+  console.log(data)
+}
+
 export default function Contact() {
-  return <section className='c-contact'>
+  return <section className='c-contact' id="contact">
     <div className="u-container pb-24 md:pb-48">
       <h3 className='text-3xl font-bold text-center mb-12 md:mb-24'><span className="text-primary">Contact</span> Me</h3>
       <div className="flex flex-wrap u-row">
@@ -27,12 +44,12 @@ export default function Contact() {
           </ContactIconText>
         </div>
         <div className="u-col w-full md:w-1/2">
-          <input type="text" placeholder="Name" className="input input-bordered w-full mb-6" />
-          <input type="text" placeholder="Email" className="input input-bordered w-full mb-6" />
-          <input type="text" placeholder="Phone" className="input input-bordered w-full mb-6" />
-          <textarea className="textarea textarea-bordered w-full mb-6" placeholder="Message" rows={5}></textarea>
+          <input type="text" placeholder="Name" name="name" className="input input-bordered w-full mb-6" />
+          <input type="text" placeholder="Email" name="email" className="input input-bordered w-full mb-6" />
+          <input type="text" placeholder="Phone" name="phone" className="input input-bordered w-full mb-6" />
+          <textarea className="textarea textarea-bordered w-full mb-6" name="message" placeholder="Message" rows={5}></textarea>
           <div className="flex justify-end ">
-            <button className="btn btn-primary">Submit</button>
+            <button className="btn btn-primary" onClick={submit}>Submit</button>
           </div>
         </div>
       </div>

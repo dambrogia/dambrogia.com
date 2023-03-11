@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Hero() {
   return <section className="c-hero relative xl:!bg-center bg-cover" style={{backgroundImage: 'url(/home/dominic-dambrogia.jpeg)', filter: 'grayscale(25%)', backgroundPosition: '90% 50%'}}>
     <div className="w-full h-full" style={{background: 'rgba(0,0,0,0.4)'}}>
@@ -11,11 +13,11 @@ export default function Hero() {
             <div className="text-center xl:text-left pt-16">
               <button className="btn btn-secondary gap-2">
                 <i className="uil uil-github text-lg"></i>
-                <span className="">GitHub</span>
+                <Link href='https://github.com/dambrogia'>GitHub</Link>
               </button>
               <button className="btn btn-primary gap-2 ml-6">
                 <i className="uil uil-envelope text-lg"></i>
-                <span className="">Contact</span>
+                <Link href='/#contact'>Contact</Link>
               </button>
             </div>
           </div>
