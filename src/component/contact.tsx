@@ -8,7 +8,7 @@ function ContactIconText({icon, children}: PropsWithChildren<{ icon: string }>) 
   </div>
 }
 
-async function submit (e: MouseEventHandler<HTMLButtonElement>) {
+async function submit () {
   const inputs = ['name', 'email', 'phone', 'message']
 
   const values = inputs.map(i => {
