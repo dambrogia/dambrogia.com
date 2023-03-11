@@ -1,6 +1,9 @@
 import OneColumn from '@/layout/one-column'
 import Head from 'next/head'
 import Hero from '@/component/hero'
+import About from '@/component/about'
+import Social from '@/component/social'
+import RecentWork from '@/component/recent-work'
 
 export default function Home() {
   return (
@@ -14,6 +17,9 @@ export default function Home() {
       </Head>
       <OneColumn>
         <Hero />
+        <About />
+        <Social />
+        <RecentWork />
       </OneColumn>
     </>
   )
