@@ -4,6 +4,7 @@ import Hero from '@/component/hero'
 import About from '@/component/about'
 import Social from '@/component/social'
 import RecentWork from '@/component/recent-work'
+import Contact from '@/component/contact'
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <About />
         <Social />
         <RecentWork />
+        <Contact />
       </OneColumn>
     </>
   )
