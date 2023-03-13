@@ -1,5 +1,6 @@
 import Header from './header'
 import Footer from './footer'
+import {NotificationStack} from '@/component/notification/view'
 
 interface OneColumnProps {
   container?: true
@@ -17,6 +18,7 @@ export default function OneColumn(props: React.PropsWithChildren<OneColumnProps>
         </div>
       </div>
       <Footer />
+      <NotificationStack />
     </div>
   )
 }

@@ -1,5 +1,7 @@
+import {useAtom} from 'jotai'
 import Link from 'next/link'
-import {MouseEventHandler, PropsWithChildren} from 'react'
+import {PropsWithChildren} from 'react'
+import {ATOM_NOTIFICATION_STACK, createNotification, Notification, NotificationTypes} from './notification/model'
 
 function ContactIconText({icon, children}: PropsWithChildren<{ icon: string }>) {
   return <div className="flex items-center justify-start pb-4">
@@ -8,24 +10,48 @@ function ContactIconText({icon, children}: PropsWithChildren<{ icon: string }>) 
   </div>
 }
 
-async function submit () {
-  const inputs = ['name', 'email', 'phone', 'message']
 
-  const values = inputs.map(i => {
-      return {[i]: (document.querySelector(`[name="${i}"]`) as HTMLInputElement)?.value}
-  })
-
-  const response = await fetch('/api/email', {
-    headers: {'Content-Type': 'application/json'},
-    method: 'POST',
-    body: JSON.stringify(values),
-  })
-
-  const data = await response.json()
-  console.log(data)
-}
 
 export default function Contact() {
+  const [stack, setStack] = useAtom(ATOM_NOTIFICATION_STACK)
+
+  async function submit () {
+    const inputs = ['name', 'email', 'phone', 'message']
+
+    const values = inputs.map(i => {
+        return {[i]: (document.querySelector(`[name="${i}"]`) as HTMLInputElement)?.value}
+    })
+
+    const response = await fetch('/api/email', {
+      headers: {'Content-Type': 'application/json'},
+      method: 'POST',
+      body: JSON.stringify(values),
+    })
+
+    let notification = createNotification()
+    notification = response.status === 200 ? success(notification) : failure(notification)
+    console.log(notification)
+    setStack([...stack].concat(notification))
+  }
+
+  const success = (note: Notification): Notification => {
+    note.type = NotificationTypes.success
+    note.children = <p>Your contact request has been fulfilled!</p>
+
+    // reset all input after submission
+    ['name', 'email', 'phone', 'message'].forEach(v => {
+      (document.querySelector(`[name="${v}"]`) as HTMLInputElement).value = ''
+    })
+
+    return note
+  }
+
+  const failure = (note: Notification): Notification => {
+    note.type = NotificationTypes.error
+    note.children = <p>Your contact request has failed!</p>
+    return note
+  }
+
   return <section className='c-contact' id="contact">
     <div className="u-container pb-24 md:pb-48">
       <h3 className='text-3xl font-bold text-center mb-12 md:mb-24'><span className="text-primary">Contact</span> Me</h3>
