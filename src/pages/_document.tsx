@@ -15,7 +15,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <div data-theme={'forest'}>
+        <div data-theme={'black'}>
           <Main />
           <NextScript />
         </div>
