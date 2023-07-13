@@ -14,13 +14,11 @@ function ContactIconText({icon, children}: PropsWithChildren<{ icon: string }>) 
 
 export default function Contact() {
   const [stack, setStack] = useAtom(ATOM_NOTIFICATION_STACK)
+  const inputs = ['name', 'email', 'phone', 'message']
 
   async function submit () {
-    const inputs = ['name', 'email', 'phone', 'message']
-
-    const values = inputs.map(i => {
-        return {[i]: (document.querySelector(`[name="${i}"]`) as HTMLInputElement)?.value}
-    })
+    const values: {[key: string]: string} = {}
+    inputs.forEach((i: string) => values[i] = (document.querySelector(`[name="${i}"]`) as HTMLInputElement)?.value)
 
     const response = await fetch('/api/email', {
       headers: {'Content-Type': 'application/json'},
@@ -29,8 +27,7 @@ export default function Contact() {
     })
 
     let notification = createNotification()
-    notification = response.status === 200 ? success(notification) : failure(notification)
-    console.log(notification)
+    notification = response.status === 201 ? success(notification) : failure(notification)
     setStack([...stack].concat(notification))
   }
 
@@ -38,8 +35,7 @@ export default function Contact() {
     note.type = NotificationTypes.success
     note.children = <p>Your contact request has been fulfilled!</p>
 
-    // reset all input after submission
-    ['name', 'email', 'phone', 'message'].forEach(v => {
+    inputs.forEach(v => {
       (document.querySelector(`[name="${v}"]`) as HTMLInputElement).value = ''
     })
 

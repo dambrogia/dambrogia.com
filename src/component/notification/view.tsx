@@ -45,7 +45,6 @@ export function NotificationStack() {
       const timer = setTimeout(() => setNotifications(notifications.slice(1)), notifications[0].durationMs)
       return () => clearTimeout(timer)
     }
-
   })
 
   return <div className="c-alerts fixed bottom-0 right-1/2 translate-x-1/2 w-full sm:w-auto">
