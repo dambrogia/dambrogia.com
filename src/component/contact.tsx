@@ -27,7 +27,7 @@ export default function Contact() {
     })
 
     let notification = createNotification()
-    notification = response.status === 200 ? success(notification) : failure(notification)
+    notification = response.status === 201 ? success(notification) : failure(notification)
     setStack([...stack].concat(notification))
   }
 

@@ -13,30 +13,26 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log(req)
-  res.status(200).json({data: req.body})
-
   const config = {
     apiKey: process.env.SENDGRID_API_KEY as string,
     mailTo: process.env.MAIL_TO as string,
+    mailFrom: process.env.MAIL_FROM as string,
     mailSubject: process.env.MAIL_SUBJECT as string,
   }
 
   const msg = {
     to: config.mailTo,
-    from: req.body.email,
+    from: config.mailFrom,
     subject: config.mailSubject,
-    text: req.body.content,
+    text: JSON.stringify(req.body, null, 4),
   }
 
   const makeData = (s: 'success' | 'failure', m: string): Data => ({data: {status: s, message: m}})
 
   try {
-    const mailerResp = await mailer.send(msg)
+    var mailerResp = await mailer.send(msg)
     res.status(201).json(makeData('success', 'Contact submission was successful.'))
   } catch (e) {
-    res.status(201).json(makeData('failure', 'Contact submission failed.'))
+    res.status(500).json(makeData('failure', 'Contact submission failed.'))
   }
 }
-
-
