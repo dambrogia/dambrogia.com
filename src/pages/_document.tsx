@@ -13,7 +13,9 @@ const selectedTheme = themes[getRandNum(0, themes.length + 1)]
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css" />
+      </Head>
       <body>
         <div data-theme={'black'}>
           <Main />
