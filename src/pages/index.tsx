@@ -14,7 +14,6 @@ export default function Home() {
         <meta name="description" content="Dominic D'Ambrogia's personal website" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
       </Head>
       <OneColumn>
         <Hero />
