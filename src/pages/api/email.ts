@@ -30,7 +30,8 @@ export default async function handler(
   const makeData = (s: 'success' | 'failure', m: string): Data => ({data: {status: s, message: m}})
 
   try {
-    var mailerResp = await mailer.send(msg)
+    mailer.setApiKey(config.apiKey)
+    await mailer.send(msg)
     res.status(201).json(makeData('success', 'Contact submission was successful.'))
   } catch (e) {
     res.status(500).json(makeData('failure', 'Contact submission failed.'))
